@@ -6,23 +6,40 @@ using UnityEngine;
 public class ItemPickup : MonoBehaviour
 {
     public Item item;
+    private bool isTouching;
 
-
+    void Update()
+    {
+        if(isTouching)
+            if (Input.GetKeyDown(KeyCode.F))
+                PickUp();
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Player")
         {
-            PickUp();
+            isTouching = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            isTouching = false;
         }
     }
 
     void PickUp()
     {
-        Debug.Log("Picking up " + item.name);
 
-        bool isThereSpace = Inventory.instance.Add(item);
+        bool isThereSpace = InventoryManager.instance.Add(item);
+
+
 
         if(isThereSpace)
+        {
             Destroy(gameObject);
+        }
     }
 }

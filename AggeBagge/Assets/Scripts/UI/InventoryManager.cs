@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class InventoryManager : MonoBehaviour
 {
     #region Singleton
-    public static Inventory instance;
+    public static InventoryManager instance;
 
     void Awake()
     {
@@ -25,6 +25,7 @@ public class Inventory : MonoBehaviour
 
     public int inventorySlots;
     public List<Item> items = new List<Item>();
+
 
 
     public bool Add(Item item)

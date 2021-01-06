@@ -4,16 +4,28 @@ using UnityEngine;
 public class Item : ScriptableObject
 {
     new public string name;
-    public Sprite icon = null;
+    public Sprite icon;
+    public EquipmentSlot Equipslot;
+    public GameObject objectPrefab;
 
     [Header("Stat Modifiers")]
     public float damage;
+    public float KnockbackForce;
+    public float attackSpeed;
     public float speed;
     public float hp;
 
-
-    public virtual void Use()
+    public virtual void Equip()
     {
-        Debug.Log("Using " + name);
+        EquipmentManager.instance.Equip(this);
+        InventoryManager.instance.Remove(this);
     }
+    public virtual void DeEquip()
+    {
+        EquipmentManager.instance.DeEquip(this);
+        InventoryManager.instance.Add(this);
+    }
+
 }
+
+public enum EquipmentSlot {Head, Chest, Feet, Weapon, Shield, Consumable, Consumable2, Consumable3}

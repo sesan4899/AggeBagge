@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1734191702679334768}
   - component: {fileID: 1734191702679334769}
+  - component: {fileID: 2835312239720135866}
   m_Layer: 0
-  m_Name: Inventory Manager
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,3 +46,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventorySlots: 26
   items: []
+--- !u!114 &2835312239720135866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734191702679334770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 063f0a5bf948e214494dcd390da81797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
