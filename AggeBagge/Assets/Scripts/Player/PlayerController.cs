@@ -10,24 +10,39 @@ public class PlayerController : MonoBehaviour
     public float jumpTime;
     public float rollForce;
     public float rollTime;
+    public float attackMoveForce;
+    public float comboTime;
+    public float attackRange;
+    public int damage;
+
 
     [Header("References")]
     public Transform groundCheck;
     public LayerMask whatIsGround;
+    public LayerMask enemyLayer;
     private Rigidbody2D myRigidbody;
     public AudioManager myAudioManager;
     private Animator myAnimator;
+    public Transform attackPoint;
 
     [Header("State-Debugging")]
     public bool isDead;
     public bool isGrounded;
     public bool stoppedJumping;
     public bool isRolling;
+    public bool disableInput;
+    public bool attack1;
+    public bool attack2;
+    public bool attack3;
+    public bool damageCollision;
 
     [Header("Data")]
     public Vector2 groundCheckSize;
     private float jumpTimeCounter;
     public float rollTimeCounter;
+    public float comboTimeCounter;
+    public int combo;
+
 
 
 
@@ -52,6 +67,7 @@ public class PlayerController : MonoBehaviour
             Movement();
             Jump();
             Roll();
+            Attack();
         }
     }
 
@@ -72,6 +88,9 @@ public class PlayerController : MonoBehaviour
             myAnimator.SetFloat("Speed", Mathf.Abs(myRigidbody.velocity.x));
             myAnimator.SetBool("Grounded", isGrounded);
             myAnimator.SetBool("Rolling", isRolling);
+            myAnimator.SetBool("Attack1", attack1);
+            myAnimator.SetBool("Attack2", attack2);
+            myAnimator.SetBool("Attack3", attack3);
             /*
             myAnimator.SetBool("isWallSliding", isWallSliding);
             myAnimator.SetBool("isDead", isDead);
@@ -87,16 +106,26 @@ public class PlayerController : MonoBehaviour
 
     private void Clocks()
     {
-        if(rollTimeCounter > 0f)
+        if (rollTimeCounter > 0f)
         {
             rollTimeCounter -= Time.deltaTime;
+        }
+
+        if(comboTimeCounter > 0f)
+        {
+            comboTimeCounter -= Time.deltaTime;
+        }
+
+        if(comboTimeCounter <= 0f)
+        {
+            combo = 0;
         }
     }
 
     private void Movement()
     {
         ///Add velocity according to input
-        if (!isRolling)
+        if (!disableInput)
         {
             myRigidbody.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * moveSpeed, myRigidbody.velocity.y);
         }
@@ -115,7 +144,7 @@ public class PlayerController : MonoBehaviour
     private void Jump()
     {
         //Initial Jump
-        if (Input.GetButton("Jump") && isGrounded && stoppedJumping && jumpTimeCounter > 0f && !isRolling)
+        if (Input.GetButton("Jump") && isGrounded && stoppedJumping && jumpTimeCounter > 0f && !disableInput)
         {
             myAudioManager.Jump.Play();
             myRigidbody.velocity = new Vector3(myRigidbody.velocity.x, jumpForce, 0f);
@@ -147,13 +176,13 @@ public class PlayerController : MonoBehaviour
     private void Roll()
     {
 
-        if (Input.GetButton("Roll") && isGrounded && rollTimeCounter <= 0f && !isRolling)
+        if (Input.GetButton("Roll") && isGrounded && rollTimeCounter <= 0f && !disableInput)
         {
             isRolling = true;
             rollTimeCounter = rollTime;
         }
 
-        if(isRolling)
+        if (isRolling)
         {
             if (transform.localScale.x > 0f)
             {
@@ -164,6 +193,76 @@ public class PlayerController : MonoBehaviour
                 myRigidbody.velocity = new Vector2(-rollForce, myRigidbody.velocity.y);
             }
 
+            DisableInput();
+
         }
+    }
+
+    private void Attack()
+    {
+        if (Input.GetButton("Attack") && !disableInput)
+        {
+            myRigidbody.velocity = new Vector2(0f, myRigidbody.velocity.y);
+            DisableInput();
+            combo++;
+
+
+
+
+            switch (combo)
+            {
+                case 1:
+                    attack1 = true;
+                    break;
+                case 2:
+                    attack2 = true;
+                    break;
+                case 3:
+                    attack3 = true;
+                    combo = 0;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        if(attack1 || attack2 || attack3)
+        {
+            if (transform.localScale.x > 0f)
+            {
+                myRigidbody.velocity = new Vector2(attackMoveForce, myRigidbody.velocity.y);
+            }
+            else
+            {
+                myRigidbody.velocity = new Vector2(-attackMoveForce, myRigidbody.velocity.y);
+            }
+
+        }
+
+        if(damageCollision)
+        {
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
+
+            foreach(Collider2D enemy in hitEnemies)
+            {
+                enemy.GetComponent<EnemyHealthController>().TakeDamage(damage);
+                damageCollision = false;
+            }
+        }
+    }
+
+    private void DisableInput()
+    {
+        disableInput = true;
+    }
+
+    void OnDrawGizmos()
+    {
+        if(attackPoint == null)
+        {
+            return;
+        }
+       // Gizmos.color = Color.yellow;
+      //  Gizmos.DrawSphere(attackPoint.position, attackRange);
     }
 }
