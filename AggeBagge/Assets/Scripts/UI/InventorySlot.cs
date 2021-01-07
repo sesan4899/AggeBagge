@@ -13,6 +13,7 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
     public UnityEvent onRight;
     public UnityEvent onMiddle;
 
+    //Adds itemIcon in slot
     public void AddItem (Item newItem)
     {
         item = newItem;
@@ -20,6 +21,7 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
         icon.enabled = true;
     }
 
+    //Clears the slot
     public void ClearSlot()
     {
         item = null;
@@ -34,7 +36,7 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
             icon.sprite = equipmentIcon;
     }
 
-
+    //Equip or DeEquip an item
     public void UseItem()
     {
 
@@ -47,6 +49,7 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    //Drop item
     public void DropItem()
     {
         if(item != null)
@@ -58,6 +61,7 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    //Clicking on an item
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
@@ -68,8 +72,25 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
                 DropItem();
             else
                 UseItem();
-
         }
     }
+
+    
+
+    public void OnCursorEnter()
+    {
+        if (item != null)
+        {
+            item.SetDescription();
+
+            PopUpUI.instance.DisplayItemInfo(item.name, item.itemDescription, new Vector2(transform.position.x + 130, transform.position.y + 20));
+        }
+    }
+    public void OnCursorExit()
+    {
+        if (item != null)
+            PopUpUI.instance.DestroyItemInfo();
+    }
+
 
 }

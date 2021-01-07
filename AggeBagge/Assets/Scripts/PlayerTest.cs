@@ -13,15 +13,23 @@ public class PlayerTest : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKey(KeyCode.LeftArrow))
+        Vector3 theScale = transform.localScale;
+
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
             transform.position = transform.position - Vector3.right * speed * Time.deltaTime;
+
+            
+            theScale.x = -1;
+            transform.localScale = theScale;
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
             transform.position = transform.position + Vector3.right * speed * Time.deltaTime;
+
+            theScale.x = 1;
+            transform.localScale = theScale;
         }
-        
 
     }
 }
