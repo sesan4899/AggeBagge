@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyHealthController : MonoBehaviour
+public class PlayerHealthController : MonoBehaviour
 {
     public int maxHealth;
     public int health;
@@ -12,13 +12,15 @@ public class EnemyHealthController : MonoBehaviour
     public float knockBackTimeCounter;
     private Rigidbody2D myRigidbody;
     public Animator myAnimator;
-    private GameObject player;
+    private GameObject enemy;
     public bool dead;
+    private PlayerController myPlayer;
 
     void Start()
     {
         health = maxHealth;
         myRigidbody = GetComponent<Rigidbody2D>();
+        myPlayer = GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -30,12 +32,12 @@ public class EnemyHealthController : MonoBehaviour
 
     private void Clocks()
     {
-        if(knockBackTimeCounter > 0)
+        if (knockBackTimeCounter > 0)
         {
             knockBackTimeCounter -= Time.deltaTime;
             stunned = true;
 
-            if (player.transform.position.x > transform.position.x)
+            if (enemy.transform.position.x > transform.position.x)
             {
                 myRigidbody.velocity = new Vector3(-knockBackForce, knockBackForce, 0f);
             }
@@ -55,19 +57,26 @@ public class EnemyHealthController : MonoBehaviour
     {
         myAnimator.SetBool("Dead", dead);
     }
-    public void TakeDamage(int damage, GameObject playerReference)
+    public void TakeDamage(int damage, GameObject enemyReference)
     {
-        if(!dead)
+        Debug.Log("Lol");
+        if (!dead)
         {
+            Debug.Log("Loll");
             health -= damage;
             knockBackTimeCounter = knockBackTime;
-            player = playerReference;
+            enemy = enemyReference;
             myRigidbody.velocity = new Vector2(0f, 0f);
 
             if (health <= 0)
             {
                 dead = true;
+                myPlayer.DisableInput();
             }
+        }
+        else
+        {
+            myRigidbody.velocity = new Vector2(0f, 0f);
         }
     }
 }

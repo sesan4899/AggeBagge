@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     public float comboTime;
     public float attackRange;
     public int damage;
+    public float knockBackForce;
+    public float knockBackTime;
 
 
     [Header("References")]
@@ -42,6 +44,7 @@ public class PlayerController : MonoBehaviour
     public float rollTimeCounter;
     public float comboTimeCounter;
     public int combo;
+    public float knockBackTimeCounter;
 
 
 
@@ -245,13 +248,13 @@ public class PlayerController : MonoBehaviour
 
             foreach(Collider2D enemy in hitEnemies)
             {
-                enemy.GetComponent<EnemyHealthController>().TakeDamage(damage);
+                enemy.GetComponent<EnemyHealthController>().TakeDamage(damage, gameObject);
                 damageCollision = false;
             }
         }
     }
 
-    private void DisableInput()
+    public void DisableInput()
     {
         disableInput = true;
     }
