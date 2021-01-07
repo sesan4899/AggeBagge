@@ -3,11 +3,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item")]
 public class Item : ScriptableObject
 {
+    [Header("Item Type")]
     new public string name;
     public Sprite icon;
+    
+    [Range(0, 4)]
+    public int Tier = 0;
     public EquipmentSlot Equipslot;
     public GameObject objectPrefab;
-    public string itemDescription;
+    [System.NonSerialized] public string itemDescription;
 
     [Header("Stat Modifiers")]
     public float damage;

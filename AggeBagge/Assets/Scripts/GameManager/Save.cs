@@ -9,23 +9,17 @@ public class Save
 
     }
 
-    public void SavePlayerInfo(int playerLevel, float playerExp, bool hasPlayerAndObject, string playerName)
+    public void SavePlayerInfo(List<string> items, string[] equipment)
     {
-        PlayerPrefs.SetInt("PlayerLevel", playerLevel);
-        PlayerPrefs.SetFloat("PlayerExp", playerExp);
-        //PlayerPrefs.SetInt("PlayerHasObject", hasPlayerAndObject == true ? 1 : 0); //Can't use bool, have to convert
 
-        if(hasPlayerAndObject)
+        for (int i = 0; i < items.Count; i++)
         {
-            PlayerPrefs.SetInt("PlayerHasObject", 1);
+            PlayerPrefs.SetString("InvSlot" + i, items[i]);
         }
-        else
+
+        for(int i = 0; i < equipment.Length; i++)
         {
-            PlayerPrefs.SetInt("PlayerHasObject", 0);
-
+            PlayerPrefs.SetString("EquipSlot" + i, equipment[i]);
         }
-        PlayerPrefs.SetString("PlayerName", playerName);
-
-
     }
 }

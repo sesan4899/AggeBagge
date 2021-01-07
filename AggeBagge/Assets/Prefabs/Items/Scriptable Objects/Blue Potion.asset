@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Blue Potion
   icon: {fileID: 21300000, guid: ace8a02646afeda4880fc3cb14cad705, type: 3}
+  Tier: 0
   Equipslot: 5
   objectPrefab: {fileID: 2482689964623017427, guid: f9ee979e971f021479a6787c81245773, type: 3}
-  itemDescription: Recover 0 Hp
   damage: 0
   knockbackForce: 0
   attackSpeed: 0

@@ -10,8 +10,8 @@ public class SlotsUI : MonoBehaviour
     InventoryManager inventory;
     EquipmentManager equipment;
 
-    InventorySlot[] invSlots;
-    InventorySlot[] equipSlots;
+    ItemSlot[] invSlots;
+    ItemSlot[] equipSlots;
 
     void Start()
     {
@@ -21,8 +21,8 @@ public class SlotsUI : MonoBehaviour
         //Call UpdateUI whenever onItemChangedCallback is triggered
         inventory.onItemChangedCallback += UpdateUI;
 
-        invSlots = invSlotParent.GetComponentsInChildren<InventorySlot>();
-        equipSlots = equipSlotParent.GetComponentsInChildren<InventorySlot>();
+        invSlots = invSlotParent.GetComponentsInChildren<ItemSlot>();
+        equipSlots = equipSlotParent.GetComponentsInChildren<ItemSlot>();
     }
 
     void Update()

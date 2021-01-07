@@ -5,37 +5,69 @@ using UnityEngine;
 public class SaveAndLoadMain : MonoBehaviour
 {
 
-    public int playerLevel;
-    public float playerExp;
-    public bool hasPlayerObject;
-    public string playerName;
+    public string[] invSlot;
+    public string[] equipSlot;
+
+
+    public List<string> items = new List<string>();
+    public string[] currentEquipment;
+
 
     private Save save;
     private Load load;
-
 
 
     void Start()
     {
         load = new Load();
 
-        load.LoadPlayerInfo(out playerLevel, out playerExp, out hasPlayerObject, out playerName);
-    }
+        load.LoadPlayerInfo(out invSlot, out equipSlot);
 
-    void Update()
-    {
-        if(Input.GetKey(KeyCode.S))
+        for (int i = 0; i < invSlot.Length; i++)
         {
-            playerLevel = 2;
-            playerExp = 3;
-            hasPlayerObject = true;
-            playerName = "AGGE";
+            if(invSlot[i] != null)
+            {
+                bool equip = false;
+                GetComponent<ItemList>().GetItemFromName(invSlot[i], equip);
+            }
+        }
 
-
-            save = new Save();
-            save.SavePlayerInfo(playerLevel, playerExp, hasPlayerObject, playerName);
+        for (int i = 0; i < equipSlot.Length; i++)
+        {
+            if (invSlot[i] != null)
+            {
+                bool equip = true;
+                GetComponent<ItemList>().GetItemFromName(equipSlot[i], equip);
+            }
         }
     }
+
+
+    public void SaveAndExit()
+    {
+        currentEquipment = new string[6];
+
+        for(int i = 0; i < InventoryManager.instance.items.Count; i++)
+        {
+            if (InventoryManager.instance.items[i] != null)
+                items.Add(InventoryManager.instance.items[i].name);
+        }
+
+        for(int i = 0; i < EquipmentManager.instance.currentEquipment.Length; i++)
+        {
+
+            if (EquipmentManager.instance.currentEquipment[i] != null)
+                currentEquipment[i] = EquipmentManager.instance.currentEquipment[i].name;
+            
+        }
+
+
+        save = new Save();
+        save.SavePlayerInfo(items, currentEquipment);
+
+        Application.Quit();
+    }
+
 
 
 }

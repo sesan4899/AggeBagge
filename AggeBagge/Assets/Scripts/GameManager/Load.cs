@@ -9,20 +9,22 @@ public class Load
 
     }
 
-    public void LoadPlayerInfo(out int playerLevel, out float playerExp, out bool hasPlayerAKey, out string playerName)
+    public void LoadPlayerInfo(out string[] invSlot, out string[] equipSlot)
     {
-        playerLevel = PlayerPrefs.GetInt("PlayerLevel");
-        playerExp = PlayerPrefs.GetFloat("PlayerExp");
-        //hasPlayerAKey = PlayerPrefs.GetInt("PlayerHasObject") == 1 ? true : false;
-        if (hasPlayerAKey = PlayerPrefs.GetInt("PlayerHasObject") == 1)
+
+        invSlot = new string[12];
+        equipSlot = new string[6];
+
+
+        for (int i = 0; i < 12; i++)
         {
-            hasPlayerAKey = true;
+            invSlot[i] = PlayerPrefs.GetString("InvSlot" + i);
         }
-        else
+
+        for (int i = 0; i < 6; i++)
         {
-            hasPlayerAKey = false;
+            equipSlot[i] = PlayerPrefs.GetString("EquipSlot" + i);
         }
-        playerName = PlayerPrefs.GetString("PlayerName");
 
     }
 }

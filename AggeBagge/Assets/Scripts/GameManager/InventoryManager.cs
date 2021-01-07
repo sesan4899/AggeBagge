@@ -27,7 +27,6 @@ public class InventoryManager : MonoBehaviour
     public List<Item> items = new List<Item>();
 
 
-
     public bool Add(Item item)
     {
         if(items.Count >= inventorySlots)
