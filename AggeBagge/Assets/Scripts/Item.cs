@@ -7,7 +7,7 @@ public class Item : ScriptableObject
     new public string name;
     public Sprite icon;
     
-    [Range(0, 4)]
+ 
     public int Tier = 0;
     public EquipmentSlot Equipslot;
     public GameObject objectPrefab;
@@ -23,26 +23,17 @@ public class Item : ScriptableObject
     public void SetDescription()
     {
         if(Equipslot == EquipmentSlot.Chest || Equipslot == EquipmentSlot.Head || Equipslot == EquipmentSlot.Shield)
-        {
             itemDescription = "+ " + hp + " Hp";
 
-        }
         else if (Equipslot == EquipmentSlot.Feet)
-        {
-            itemDescription = "+ " + hp + " Hp" + System.Environment.NewLine
-                 + "+ " + speed + " Speed";
+            itemDescription = "+ " + hp + " Hp\n" + "+ " + speed + " Speed";
 
-        }
         else if (Equipslot == EquipmentSlot.Weapon)
-        {
-            itemDescription = "+ " + damage + " Damage\n"
-                + "+ " + knockbackForce + " KnockBack";
+            itemDescription = "+ " + damage + " Damage\n" + "+ " + knockbackForce + " KnockBack";
 
-        }
         else
-        {
             itemDescription = "Recover " + hp + " Hp";
-        }
+        
     }
 
     public virtual void Equip()
@@ -55,7 +46,6 @@ public class Item : ScriptableObject
         EquipmentManager.instance.DeEquip(this);
         InventoryManager.instance.Add(this);
     }
-
 
 }
 

@@ -7,12 +7,31 @@ public class ItemPickup : MonoBehaviour
 {
     public Item item;
     private bool isTouching;
+    float alpha = 1;
+    float aliveTime;
+
+    void Start()
+    {
+        GetComponent<SpriteRenderer>().sprite = item.icon;
+
+        aliveTime = ItemList.instance.itemAliveTime;
+        Destroy(gameObject, aliveTime);
+    }
 
     void Update()
     {
-        if(isTouching)
+        aliveTime -= Time.deltaTime;
+
+        if (isTouching)
             if (Input.GetKeyDown(KeyCode.F))
                 PickUp();
+
+        if(aliveTime < 5)
+        {
+            SpriteRenderer sprite = GetComponent<SpriteRenderer>();
+            alpha -= 0.2f * Time.deltaTime;
+            sprite.material.color = new Color(1, 1, 1, alpha);
+        }
     }
 
     void PickUp()

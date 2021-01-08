@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc09727260c60904da908948b4800f92, type: 3}
+  m_Name: Helmet T1
+  m_EditorClassIdentifier: 
+  name: Fine Helmet
+  icon: {fileID: -3109597227326708797, guid: 90ccf009fb6743345927b23c01e5a5d3, type: 3}
+  Tier: 1
+  Equipslot: 0
+  objectPrefab: {fileID: 8785462245880049801, guid: 3421553729573044c840166fcf29c04c, type: 3}
+  damage: 0
+  knockbackForce: 0
+  attackSpeed: 0
+  speed: 0
+  hp: 4

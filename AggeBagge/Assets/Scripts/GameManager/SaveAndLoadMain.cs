@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class SaveAndLoadMain : MonoBehaviour
 {
+    public bool doNotLoad;
+    public bool reset;
 
     public string[] invSlot;
     public string[] equipSlot;
 
 
-    public List<string> items = new List<string>();
-    public string[] currentEquipment;
+    //public List<string> items = new List<string>();
+    public string[] invItems = null;
+    public string[] currentEquipment = null;
 
 
     private Save save;
@@ -21,39 +24,80 @@ public class SaveAndLoadMain : MonoBehaviour
     {
         load = new Load();
 
-        load.LoadPlayerInfo(out invSlot, out equipSlot);
-
-        for (int i = 0; i < invSlot.Length; i++)
+        if(!doNotLoad)
         {
-            if(invSlot[i] != null)
-            {
-                bool equip = false;
-                GetComponent<ItemList>().GetItemFromName(invSlot[i], equip);
-            }
-        }
+            if(!reset)
+                load.LoadPlayerInfo(out invSlot, out equipSlot);
 
-        for (int i = 0; i < equipSlot.Length; i++)
-        {
-            if (invSlot[i] != null)
+            for (int i = 0; i < invSlot.Length; i++)
             {
-                bool equip = true;
-                GetComponent<ItemList>().GetItemFromName(equipSlot[i], equip);
+                if(invSlot[i] != null)
+                {
+
+                    if(reset)
+                    {
+                        invSlot[i] = null;
+                        return;
+                    }
+                    else
+                    {
+                        bool equip = false;
+                        bool foundItem = ItemList.instance.getItemFromName(invSlot[i], equip);
+
+                        if (!foundItem)
+                        {
+                            invSlot[i] = null;
+                        }
+
+                    }
+
+                }
+                
             }
+
+            for (int i = 0; i < equipSlot.Length; i++)
+            {
+                if (equipSlot[i] != null)
+                {
+                    if (reset)
+                    {
+                        equipSlot[i] = null;
+                        return;
+                    }
+                    else
+                    {
+                        bool equip = true;
+                        bool foundItem = ItemList.instance.getItemFromName(equipSlot[i], equip);
+
+                        if (!foundItem)
+                        {
+                            equipSlot[i] = null;
+                        }
+
+                    }
+                }
+            }
+
         }
+        
     }
 
 
     public void SaveAndExit()
     {
         currentEquipment = new string[6];
+        invItems = new string[12];
 
-        for(int i = 0; i < InventoryManager.instance.items.Count; i++)
+
+        for (int i = 0; i < InventoryManager.instance.items.Count; i++)
         {
             if (InventoryManager.instance.items[i] != null)
-                items.Add(InventoryManager.instance.items[i].name);
+                invItems[i] = InventoryManager.instance.items[i].name;
+
+            //items.Add(InventoryManager.instance.items[i].name);
         }
 
-        for(int i = 0; i < EquipmentManager.instance.currentEquipment.Length; i++)
+        for (int i = 0; i < EquipmentManager.instance.currentEquipment.Length; i++)
         {
 
             if (EquipmentManager.instance.currentEquipment[i] != null)
@@ -63,7 +107,7 @@ public class SaveAndLoadMain : MonoBehaviour
 
 
         save = new Save();
-        save.SavePlayerInfo(items, currentEquipment);
+        save.SavePlayerInfo(invItems, currentEquipment);
 
         Application.Quit();
     }

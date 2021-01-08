@@ -20,6 +20,7 @@ public class SlotsUI : MonoBehaviour
 
         //Call UpdateUI whenever onItemChangedCallback is triggered
         inventory.onItemChangedCallback += UpdateUI;
+        equipment.onItemChangedCallback += UpdateUI;
 
         invSlots = invSlotParent.GetComponentsInChildren<ItemSlot>();
         equipSlots = equipSlotParent.GetComponentsInChildren<ItemSlot>();
@@ -31,6 +32,8 @@ public class SlotsUI : MonoBehaviour
         {
             inventoryHUD.SetActive(!inventoryHUD.activeSelf);
             equipmentHUD.SetActive(!equipmentHUD.activeSelf);
+
+            PopUpUI.instance.DestroyItemInfo();
         }
     }
 

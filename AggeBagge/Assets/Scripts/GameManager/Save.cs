@@ -9,10 +9,10 @@ public class Save
 
     }
 
-    public void SavePlayerInfo(List<string> items, string[] equipment)
+    public void SavePlayerInfo(string[] items, string[] equipment)
     {
 
-        for (int i = 0; i < items.Count; i++)
+        for (int i = 0; i < items.Length; i++)
         {
             PlayerPrefs.SetString("InvSlot" + i, items[i]);
         }

@@ -84,7 +84,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         {
             item.SetDescription();
 
-            PopUpUI.instance.DisplayItemInfo(item.name, item.itemDescription, new Vector2(transform.position.x + 130, transform.position.y + 20));
+            PopUpUI.instance.DisplayItemInfo(item.name, item.itemDescription, new Vector2(transform.position.x + 185, transform.position.y + 20));
         }
     }
     public void OnCursorExit()

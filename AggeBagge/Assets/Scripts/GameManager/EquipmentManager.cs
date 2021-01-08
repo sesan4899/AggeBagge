@@ -7,7 +7,7 @@ public class EquipmentManager : MonoBehaviour
     #region Singleton
 
     public static EquipmentManager instance;
-
+    public GameObject player;
     void Awake ()
     {
         instance = this;
@@ -46,20 +46,64 @@ public class EquipmentManager : MonoBehaviour
             inventory.Add(oldItem);
         }
 
+        currentEquipment[slotIndex] = newItem;
+        StatsChange(newItem, oldItem);
+
         if (onItemChangedCallback != null)
             onItemChangedCallback.Invoke();
-
-        currentEquipment[slotIndex] = newItem;
     }
 
     public void DeEquip(Item equippedItem)
     {
         int slotIndex = (int)equippedItem.Equipslot;
 
+        currentEquipment[slotIndex] = null;
+
+        Item noItem = null;
+        StatsChange(noItem, equippedItem);
+
         if (onItemChangedCallback != null)
             onItemChangedCallback.Invoke();
-
-        currentEquipment[slotIndex] = null;
     }
+
+    public void StatsChange(Item newItem, Item oldItem)
+    {
+        float dmg = 0;
+        float atkSpeed = 0;
+        float knockback = 0;
+        float hp = 0;
+        float moveSpeed = 0;
+        float potionHp = 0;
+
+        if(newItem != null)
+        {
+            dmg = newItem.damage;
+            atkSpeed = newItem.attackSpeed;
+            knockback = newItem.knockbackForce;
+            moveSpeed = newItem.speed;
+
+            if (newItem.Equipslot != EquipmentSlot.Consumable)
+                hp = newItem.hp;
+            else
+                potionHp = newItem.hp;
+        }
+
+        if (oldItem != null)
+        {
+            dmg -= oldItem.damage;
+            atkSpeed -= oldItem.attackSpeed;
+            knockback -= oldItem.knockbackForce;
+            moveSpeed -= oldItem.speed;
+
+            if(oldItem.Equipslot != EquipmentSlot.Consumable)
+                hp -= oldItem.hp;
+            else
+                potionHp -= oldItem.hp;
+        }
+
+        player.GetComponent<PlayerTest>().GetEquipmentStats(dmg, atkSpeed, knockback, hp, moveSpeed, potionHp);
+
+    }
+
 
 }
