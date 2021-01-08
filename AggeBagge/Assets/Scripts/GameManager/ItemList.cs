@@ -84,21 +84,19 @@ public class ItemList : MonoBehaviour
         {
             for(int t = 0; t < addtier.Length; t++)
             {
-                if(addtier[t] == true)
+                if (addtier[t] == true)
                 {
-                    dropList.Add(item[i]);
+                    if(item[i].tier == t)
+                        dropList.Add(item[i]);
                 }
             }
         }
 
-        int index = Random.Range(0, dropList.Count);
-
-        Instantiate(dropList[index], dropPos, Quaternion.identity);
-
+        if(dropList.Count > 0)
+        {
+            int index = Random.Range(0, dropList.Count);
+            Instantiate(dropList[index].objectPrefab, dropPos, Quaternion.identity).GetComponent<ItemDrop>().item = dropList[index];
+        }
     }
-
-
-
-
 
 }

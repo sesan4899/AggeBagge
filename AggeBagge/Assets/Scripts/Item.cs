@@ -8,17 +8,17 @@ public class Item : ScriptableObject
     public Sprite icon;
     
  
-    public int Tier = 0;
+    public int tier = 0;
     public EquipmentSlot Equipslot;
     public GameObject objectPrefab;
     [System.NonSerialized] public string itemDescription;
 
     [Header("Stat Modifiers")]
-    public float damage;
+    public int damage;
     public float knockbackForce;
     public float attackSpeed;
     public float speed;
-    public float hp;
+    public int hp;
 
     public void SetDescription()
     {

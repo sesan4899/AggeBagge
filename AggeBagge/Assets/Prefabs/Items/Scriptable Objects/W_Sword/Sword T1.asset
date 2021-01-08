@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Fine Sword
   icon: {fileID: -8075540540573667582, guid: 90ccf009fb6743345927b23c01e5a5d3, type: 3}
-  Tier: 1
+  tier: 0
   Equipslot: 3
   objectPrefab: {fileID: 5730324764888117719, guid: 557e4c3c25917be46b6879ebc0c72f75, type: 3}
-  damage: 3
+  damage: 12
   knockbackForce: 2
   attackSpeed: 0
   speed: 0

@@ -49,8 +49,8 @@ public class EquipmentManager : MonoBehaviour
         currentEquipment[slotIndex] = newItem;
         StatsChange(newItem, oldItem);
 
-        if (onItemChangedCallback != null)
-            onItemChangedCallback.Invoke();
+
+        OnItemChange();
     }
 
     public void DeEquip(Item equippedItem)
@@ -62,16 +62,23 @@ public class EquipmentManager : MonoBehaviour
         Item noItem = null;
         StatsChange(noItem, equippedItem);
 
+
+        OnItemChange();
+    }
+
+    public void OnItemChange()
+    {
         if (onItemChangedCallback != null)
             onItemChangedCallback.Invoke();
+
     }
 
     public void StatsChange(Item newItem, Item oldItem)
     {
-        float dmg = 0;
+        int dmg = 0;
         float atkSpeed = 0;
         float knockback = 0;
-        float hp = 0;
+        int hp = 0;
         float moveSpeed = 0;
         float potionHp = 0;
 
@@ -101,7 +108,7 @@ public class EquipmentManager : MonoBehaviour
                 potionHp -= oldItem.hp;
         }
 
-        player.GetComponent<PlayerTest>().GetEquipmentStats(dmg, atkSpeed, knockback, hp, moveSpeed, potionHp);
+        player.GetComponent<PlayerController>().GetEquipmentStats(dmg, atkSpeed, knockback, hp, moveSpeed, potionHp);
 
     }
 

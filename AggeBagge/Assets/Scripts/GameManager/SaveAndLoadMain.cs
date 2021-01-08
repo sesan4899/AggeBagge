@@ -6,12 +6,19 @@ public class SaveAndLoadMain : MonoBehaviour
 {
     public bool doNotLoad;
     public bool reset;
+    public GameObject playerGO;
 
+    [Header("Loaded")]
     public string[] invSlot;
     public string[] equipSlot;
 
+    public float xPos;
+    public float yPos;
+    public int hp;
+    public int wave;
+    public int killCount;
 
-    //public List<string> items = new List<string>();
+    [Header("Saved")]
     public string[] invItems = null;
     public string[] currentEquipment = null;
 
@@ -22,24 +29,30 @@ public class SaveAndLoadMain : MonoBehaviour
 
     void Start()
     {
+        if(reset)
+        {
+            PlayerPrefs.DeleteAll();
+        }
+
         load = new Load();
 
         if(!doNotLoad)
         {
-            if(!reset)
-                load.LoadPlayerInfo(out invSlot, out equipSlot);
+            PlayerHealthController playerHp = playerGO.GetComponent<PlayerHealthController>();
+            load.LoadPlayerInfo(out invSlot, out equipSlot, out xPos, out yPos, out hp, out wave, out killCount);
 
-            for (int i = 0; i < invSlot.Length; i++)
+            playerHp.health = hp;
+
+
+            if (hp <= 0)
+                playerHp.health = playerHp.maxHealth;
+            
+            else
             {
-                if(invSlot[i] != null)
+               playerGO.transform.position = new Vector2(xPos, yPos);
+                for (int i = 0; i < invSlot.Length; i++)
                 {
-
-                    if(reset)
-                    {
-                        invSlot[i] = null;
-                        return;
-                    }
-                    else
+                    if(invSlot[i] != null)
                     {
                         bool equip = false;
                         bool foundItem = ItemList.instance.getItemFromName(invSlot[i], equip);
@@ -50,21 +63,12 @@ public class SaveAndLoadMain : MonoBehaviour
                         }
 
                     }
-
-                }
                 
-            }
+                }
 
-            for (int i = 0; i < equipSlot.Length; i++)
-            {
-                if (equipSlot[i] != null)
+                for (int i = 0; i < equipSlot.Length; i++)
                 {
-                    if (reset)
-                    {
-                        equipSlot[i] = null;
-                        return;
-                    }
-                    else
+                    if (equipSlot[i] != null)
                     {
                         bool equip = true;
                         bool foundItem = ItemList.instance.getItemFromName(equipSlot[i], equip);
@@ -73,18 +77,26 @@ public class SaveAndLoadMain : MonoBehaviour
                         {
                             equipSlot[i] = null;
                         }
-
+                    
                     }
                 }
+
+
             }
 
         }
-        
     }
 
 
     public void SaveAndExit()
     {
+        
+        float xPos = playerGO.transform.position.x;
+        float yPos = playerGO.transform.position.y;
+        int currentHealth = playerGO.GetComponent<PlayerHealthController>().health;
+        int wave = 0;
+        int killCount = 0;
+
         currentEquipment = new string[6];
         invItems = new string[12];
 
@@ -107,7 +119,7 @@ public class SaveAndLoadMain : MonoBehaviour
 
 
         save = new Save();
-        save.SavePlayerInfo(invItems, currentEquipment);
+        save.SavePlayerInfo(invItems, currentEquipment, xPos, yPos, currentHealth, wave, killCount);
 
         Application.Quit();
     }

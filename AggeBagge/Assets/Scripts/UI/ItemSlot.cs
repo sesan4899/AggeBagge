@@ -56,7 +56,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         if(item != null)
         {
             Vector3 playerPos = GameObject.FindWithTag("Player").transform.position;
-            Instantiate(item.objectPrefab, playerPos, Quaternion.identity);
+            Instantiate(item.objectPrefab, playerPos + new Vector3(0, 0.8f, 0), Quaternion.identity).GetComponent<ItemDrop>().item = item;
 
             InventoryManager.instance.Remove(item);
         }

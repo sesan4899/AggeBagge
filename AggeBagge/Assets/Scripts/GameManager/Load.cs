@@ -9,8 +9,17 @@ public class Load
 
     }
 
-    public void LoadPlayerInfo(out string[] invSlot, out string[] equipSlot)
+    public void LoadPlayerInfo(out string[] invSlot, out string[] equipSlot, out float xPos, out float yPos, out int hp, out int wave, out int killCount)
     {
+
+        xPos = PlayerPrefs.GetFloat("XPos");
+        yPos = PlayerPrefs.GetFloat("YPos");
+        hp = PlayerPrefs.GetInt("Hp");
+        wave = PlayerPrefs.GetInt("Wave");
+        killCount = PlayerPrefs.GetInt("KillCount");
+
+
+
 
         invSlot = new string[12];
         equipSlot = new string[6];

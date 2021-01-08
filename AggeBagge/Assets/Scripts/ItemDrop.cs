@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class ItemPickup : MonoBehaviour
+public class ItemDrop : MonoBehaviour
 {
     public Item item;
     private bool isTouching;

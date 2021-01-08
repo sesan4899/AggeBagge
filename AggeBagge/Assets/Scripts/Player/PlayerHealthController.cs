@@ -18,7 +18,7 @@ public class PlayerHealthController : MonoBehaviour
 
     void Start()
     {
-        health = maxHealth;
+        //health = maxHealth;
         myRigidbody = GetComponent<Rigidbody2D>();
         myPlayer = GetComponent<PlayerController>();
     }

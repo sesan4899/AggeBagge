@@ -6,7 +6,6 @@ using Cinemachine;
 public class CameraPan : MonoBehaviour
 {
     public GameObject cmCameraPan;
-    public GameObject cam;
 
     public float startSpeed;
     public float maxSpeed;

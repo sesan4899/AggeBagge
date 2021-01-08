@@ -9,8 +9,16 @@ public class Save
 
     }
 
-    public void SavePlayerInfo(string[] items, string[] equipment)
+    public void SavePlayerInfo(string[] items, string[] equipment, float xPos, float yPos, int hp, int wave, int killCount)
     {
+
+        PlayerPrefs.SetFloat("XPos", xPos);
+        PlayerPrefs.SetFloat("YPos", yPos);
+        PlayerPrefs.SetInt("Hp", hp);
+        PlayerPrefs.SetInt("Wave", wave);
+        PlayerPrefs.SetInt("KillCount", killCount);
+
+
 
         for (int i = 0; i < items.Length; i++)
         {
@@ -21,5 +29,7 @@ public class Save
         {
             PlayerPrefs.SetString("EquipSlot" + i, equipment[i]);
         }
+
+        PlayerPrefs.Save();
     }
 }

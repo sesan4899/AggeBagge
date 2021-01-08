@@ -15,6 +15,7 @@ public class SlotsUI : MonoBehaviour
 
     void Start()
     {
+
         inventory = InventoryManager.instance;
         equipment = EquipmentManager.instance;
 
@@ -34,6 +35,8 @@ public class SlotsUI : MonoBehaviour
             equipmentHUD.SetActive(!equipmentHUD.activeSelf);
 
             PopUpUI.instance.DestroyItemInfo();
+
+            equipment.OnItemChange();
         }
     }
 

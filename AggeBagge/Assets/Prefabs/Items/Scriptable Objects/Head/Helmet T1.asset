@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Fine Helmet
   icon: {fileID: -3109597227326708797, guid: 90ccf009fb6743345927b23c01e5a5d3, type: 3}
-  Tier: 1
+  tier: 0
   Equipslot: 0
   objectPrefab: {fileID: 8785462245880049801, guid: 3421553729573044c840166fcf29c04c, type: 3}
   damage: 0
   knockbackForce: 0
   attackSpeed: 0
   speed: 0
-  hp: 4
+  hp: 15

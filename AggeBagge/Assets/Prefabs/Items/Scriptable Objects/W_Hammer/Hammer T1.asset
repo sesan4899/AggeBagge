@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Fine Hammer
   icon: {fileID: -5559721161364422116, guid: 90ccf009fb6743345927b23c01e5a5d3, type: 3}
-  Tier: 1
+  tier: 0
   Equipslot: 3
   objectPrefab: {fileID: 5730324764888117719, guid: d506b2a7665268b43845360428db545a, type: 3}
-  damage: 5
+  damage: 16
   knockbackForce: 6
   attackSpeed: 0
   speed: 0

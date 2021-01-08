@@ -42,16 +42,6 @@ public class PlayerTest : MonoBehaviour
         speed += moveSpeed;
         potionPower += potionHp;
 
-        //if (dmg < 0)
-        //    dmg = 0;
-        //if (atkSpeed < 0)
-        //    atkSpeed = 0;
-        //if (knockback < 0)
-        //    knockback = 0;
-        //if (hp < 0)
-        //    hp = 0;
-        //if (moveSpeed < 0)
-        //    moveSpeed = 0;
     }
 
 }

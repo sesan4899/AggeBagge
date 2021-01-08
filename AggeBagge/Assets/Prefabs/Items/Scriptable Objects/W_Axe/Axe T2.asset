@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Rare Axe
   icon: {fileID: 2681270117926194083, guid: 90ccf009fb6743345927b23c01e5a5d3, type: 3}
-  Tier: 0
+  tier: 0
   Equipslot: 3
   objectPrefab: {fileID: 5730324764888117719, guid: fb6e55702c49c2b408b0c4ef9b27d7c7, type: 3}
-  damage: 5
+  damage: 24
   knockbackForce: 4
   attackSpeed: 0
   speed: 0

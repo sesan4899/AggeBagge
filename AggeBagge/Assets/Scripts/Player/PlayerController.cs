@@ -254,6 +254,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void GetEquipmentStats(int dmg, float atkSpeed, float knockback, int hp, float moveSpeed, float potionHp)
+    {
+        damage += dmg;
+        knockBackForce += knockback;
+        moveSpeed += moveSpeed;
+        
+        GetComponent<PlayerHealthController>().maxHealth += hp;
+        
+        //attackSpeed += atkSpeed;
+        //potionPower += potionHp;
+    }
+
+
     public void DisableInput()
     {
         disableInput = true;
