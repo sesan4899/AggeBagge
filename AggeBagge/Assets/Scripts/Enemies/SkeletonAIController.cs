@@ -72,7 +72,7 @@ public class SkeletonAIController : MonoBehaviour
 
     private void FlipSelf()
     {
-        if(!stunned)
+        if (!stunned && !attacking)
         {
             if (myRigidbody.velocity.x > 0f)
             {
@@ -239,8 +239,6 @@ public class SkeletonAIController : MonoBehaviour
                 myRigidbody.velocity = new Vector2(0f, myRigidbody.velocity.y);
 
                 int combo = Random.Range(1, 3);
-
-
 
                     switch (combo)
                     {
