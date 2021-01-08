@@ -11,6 +11,11 @@ public class EquipmentManager : MonoBehaviour
     void Awake ()
     {
         instance = this;
+
+        inventory = InventoryManager.instance;
+
+        int numberOfSlots = System.Enum.GetNames(typeof(EquipmentSlot)).Length;
+        currentEquipment = new Item[numberOfSlots];
     }
 
     #endregion
@@ -18,13 +23,15 @@ public class EquipmentManager : MonoBehaviour
     public Item[] currentEquipment;
     InventoryManager inventory;
 
+    public delegate void OnItemChanged();
+    public OnItemChanged onItemChangedCallback;
 
     void Start ()
     {
-        inventory = InventoryManager.instance;
+        //inventory = InventoryManager.instance;
 
-        int numberOfSlots = System.Enum.GetNames(typeof(EquipmentSlot)).Length;
-        currentEquipment = new Item[numberOfSlots];
+        //int numberOfSlots = System.Enum.GetNames(typeof(EquipmentSlot)).Length;
+        //currentEquipment = new Item[numberOfSlots];
     }
 
     public void Equip(Item newItem)
@@ -39,12 +46,18 @@ public class EquipmentManager : MonoBehaviour
             inventory.Add(oldItem);
         }
 
+        if (onItemChangedCallback != null)
+            onItemChangedCallback.Invoke();
+
         currentEquipment[slotIndex] = newItem;
     }
 
     public void DeEquip(Item equippedItem)
     {
         int slotIndex = (int)equippedItem.Equipslot;
+
+        if (onItemChangedCallback != null)
+            onItemChangedCallback.Invoke();
 
         currentEquipment[slotIndex] = null;
     }

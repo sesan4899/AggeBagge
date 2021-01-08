@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
-public class InventorySlot : MonoBehaviour, IPointerClickHandler
+public class ItemSlot : MonoBehaviour, IPointerClickHandler
 {
     public Image icon;
     public Sprite equipmentIcon = null;
@@ -13,6 +13,7 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
     public UnityEvent onRight;
     public UnityEvent onMiddle;
 
+   
     //Adds itemIcon in slot
     public void AddItem (Item newItem)
     {
