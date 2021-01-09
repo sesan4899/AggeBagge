@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Rare Hammer
   icon: {fileID: -2959049900171790259, guid: 90ccf009fb6743345927b23c01e5a5d3, type: 3}
-  tier: 0
+  tier: 2
   Equipslot: 3
   objectPrefab: {fileID: 5730324764888117719, guid: d506b2a7665268b43845360428db545a, type: 3}
   damage: 28

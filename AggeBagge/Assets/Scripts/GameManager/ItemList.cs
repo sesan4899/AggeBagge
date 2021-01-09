@@ -53,6 +53,7 @@ public class ItemList : MonoBehaviour
         List<Item> dropList = new List<Item>();
         int percent = Random.Range(1, 100);
 
+        Debug.Log(percent);
 
         if (percent <= tier3Rarity)
         {
@@ -86,8 +87,12 @@ public class ItemList : MonoBehaviour
             {
                 if (addtier[t] == true)
                 {
-                    if(item[i].tier == t)
+                    if (item[i].tier == t)
+                    {
+                        Debug.Log(item[i]);
+                        Debug.Log(item[i].tier);
                         dropList.Add(item[i]);
+                    }
                 }
             }
         }
@@ -95,6 +100,7 @@ public class ItemList : MonoBehaviour
         if(dropList.Count > 0)
         {
             int index = Random.Range(0, dropList.Count);
+            Debug.Log(dropList[index]);
             Instantiate(dropList[index].objectPrefab, dropPos, Quaternion.identity).GetComponent<ItemDrop>().item = dropList[index];
         }
     }

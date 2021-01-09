@@ -14,6 +14,8 @@ public class HUD : MonoBehaviour
     public Text kill;
     public Text hp;
 
+    public Image consumable;
+
     PlayerController player;
     PlayerHealthController playerHp;
 
@@ -32,6 +34,16 @@ public class HUD : MonoBehaviour
 
         healthSlider.maxValue = playerHp.maxHealth;
         healthSlider.value = playerHp.health;
+
+        if(EquipmentManager.instance.currentEquipment[5] != null)
+        {
+            consumable.sprite = EquipmentManager.instance.currentEquipment[5].icon;
+            consumable.gameObject.SetActive(true);
+        }
+        else
+        {
+            consumable.gameObject.SetActive(false);
+        }
     }
 
 

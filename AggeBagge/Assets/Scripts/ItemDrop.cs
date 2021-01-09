@@ -36,6 +36,14 @@ public class ItemDrop : MonoBehaviour
 
     void PickUp()
     {
+        int slotIndex = (int)item.Equipslot;
+        if (EquipmentManager.instance.currentEquipment[slotIndex] == null)
+        {
+            EquipmentManager.instance.Equip(item);
+            Destroy(gameObject);
+            return;
+        }
+
         bool isThereSpace = InventoryManager.instance.Add(item);
 
         if(isThereSpace)

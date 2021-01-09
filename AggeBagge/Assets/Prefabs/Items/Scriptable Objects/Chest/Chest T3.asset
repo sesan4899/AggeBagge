@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Epic ChestPlate
   icon: {fileID: -1483235383253983028, guid: 90ccf009fb6743345927b23c01e5a5d3, type: 3}
-  tier: 0
+  tier: 3
   Equipslot: 1
   objectPrefab: {fileID: 8785462245880049801, guid: aaf52a68bb2e4ce4da0efe4c390d2197, type: 3}
   damage: 0

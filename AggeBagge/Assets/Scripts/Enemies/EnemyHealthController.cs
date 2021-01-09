@@ -67,7 +67,6 @@ public class EnemyHealthController : MonoBehaviour
             if (health <= 0)
             {
                 dead = true;
-                Debug.Log("!");
                 ItemList.instance.DropItem(transform.position);
             }
         }

@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class EquipmentManager : MonoBehaviour
 {
-    #region Singleton
 
     public static EquipmentManager instance;
     public GameObject player;
+    
+    
     void Awake ()
     {
         instance = this;
@@ -18,21 +19,12 @@ public class EquipmentManager : MonoBehaviour
         currentEquipment = new Item[numberOfSlots];
     }
 
-    #endregion
-
     public Item[] currentEquipment;
     InventoryManager inventory;
 
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
 
-    void Start ()
-    {
-        //inventory = InventoryManager.instance;
-
-        //int numberOfSlots = System.Enum.GetNames(typeof(EquipmentSlot)).Length;
-        //currentEquipment = new Item[numberOfSlots];
-    }
 
     public void Equip(Item newItem)
     {
@@ -63,6 +55,12 @@ public class EquipmentManager : MonoBehaviour
         StatsChange(noItem, equippedItem);
 
 
+        OnItemChange();
+    }
+
+    public void UsePotion()
+    {
+        currentEquipment[5] = null;
         OnItemChange();
     }
 

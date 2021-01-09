@@ -40,7 +40,6 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     //Equip or DeEquip an item
     public void UseItem()
     {
-
         if (item != null)
         {
             if (equipmentIcon == null)

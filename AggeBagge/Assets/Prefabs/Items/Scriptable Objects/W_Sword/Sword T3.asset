@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Epic Sword
   icon: {fileID: -693078523021356187, guid: 90ccf009fb6743345927b23c01e5a5d3, type: 3}
-  tier: 0
+  tier: 3
   Equipslot: 3
   objectPrefab: {fileID: 5730324764888117719, guid: 557e4c3c25917be46b6879ebc0c72f75, type: 3}
   damage: 35

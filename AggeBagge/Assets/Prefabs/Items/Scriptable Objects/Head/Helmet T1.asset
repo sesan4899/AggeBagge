@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Fine Helmet
   icon: {fileID: -3109597227326708797, guid: 90ccf009fb6743345927b23c01e5a5d3, type: 3}
-  tier: 0
+  tier: 1
   Equipslot: 0
   objectPrefab: {fileID: 8785462245880049801, guid: 3421553729573044c840166fcf29c04c, type: 3}
   damage: 0
