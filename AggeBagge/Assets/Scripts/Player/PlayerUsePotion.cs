@@ -6,6 +6,7 @@ public class PlayerUsePotion : MonoBehaviour
 {
     public KeyCode DrinkPotionKey;
     public float recoverSpeed;
+    public AudioManager myAudioManager;
 
     int recoverHp = 0;
 
@@ -15,6 +16,7 @@ public class PlayerUsePotion : MonoBehaviour
     void Start()
     {
         playerHp = GetComponent<PlayerHealthController>();
+        myAudioManager = FindObjectOfType<AudioManager>();
         counter = recoverSpeed;
     }
 
@@ -24,6 +26,7 @@ public class PlayerUsePotion : MonoBehaviour
         {
             if(EquipmentManager.instance.currentEquipment[5] != null)
             {
+                myAudioManager.Heal.Play();
                 recoverHp = EquipmentManager.instance.currentEquipment[5].hp;
                 EquipmentManager.instance.UsePotion();
             }

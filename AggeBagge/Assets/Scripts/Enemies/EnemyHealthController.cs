@@ -14,11 +14,12 @@ public class EnemyHealthController : MonoBehaviour
     public Animator myAnimator;
     private GameObject player;
     public bool dead;
-
+    public AudioManager myAudioManager;
     void Start()
     {
         health = maxHealth;
         myRigidbody = GetComponent<Rigidbody2D>();
+        myAudioManager = FindObjectOfType<AudioManager>();
     }
 
     // Update is called once per frame
@@ -63,11 +64,13 @@ public class EnemyHealthController : MonoBehaviour
             knockBackTimeCounter = knockBackTime;
             player = playerReference;
             myRigidbody.velocity = new Vector2(0f, 0f);
+            myAudioManager.BloodHit.Play();
 
             if (health <= 0)
             {
                 dead = true;
                 ItemList.instance.DropItem(transform.position);
+                myAudioManager.SkeletonDeath.Play();
             }
         }
     }

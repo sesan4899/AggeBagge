@@ -67,11 +67,13 @@ public class PlayerHealthController : MonoBehaviour
             knockBackTimeCounter = knockBackTime;
             enemy = enemyReference;
             myRigidbody.velocity = new Vector2(0f, 0f);
+            myPlayer.myAudioManager.PlayerHit.Play();
 
             if (health <= 0)
             {
                 dead = true;
                 myPlayer.DisableInput();
+                myPlayer.myAudioManager.PlayerDeath.Play();
             }
         }
         else

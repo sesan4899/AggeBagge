@@ -134,12 +134,12 @@ public class PlayerController : MonoBehaviour
             myRigidbody.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * moveSpeed, myRigidbody.velocity.y);
         }
 
-        if (myRigidbody.velocity.x > 0f)
+        if (myRigidbody.velocity.x > 0f && !disableInput)
         {
             transform.localScale = new Vector3(1f, 1f, 1f);
         }
 
-        if (myRigidbody.velocity.x < 0f)
+        if (myRigidbody.velocity.x < 0f && !disableInput)
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
         }
@@ -184,6 +184,7 @@ public class PlayerController : MonoBehaviour
         {
             isRolling = true;
             rollTimeCounter = rollTime;
+            myAudioManager.Roll.Play();
         }
 
         if (isRolling)
@@ -217,12 +218,15 @@ public class PlayerController : MonoBehaviour
             {
                 case 1:
                     attack1 = true;
+                    myAudioManager.Swing1.Play();
                     break;
                 case 2:
                     attack2 = true;
+                    myAudioManager.Swing2.Play();
                     break;
                 case 3:
                     attack3 = true;
+                    myAudioManager.Swing3.Play();
                     combo = 0;
                     break;
                 default:
