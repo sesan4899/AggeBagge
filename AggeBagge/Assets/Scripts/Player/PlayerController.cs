@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     public bool attack3;
     public bool damageCollision;
 
+
     [Header("Data")]
     public Vector2 groundCheckSize;
     private float jumpTimeCounter;
@@ -114,12 +115,12 @@ public class PlayerController : MonoBehaviour
             rollTimeCounter -= Time.deltaTime;
         }
 
-        if(comboTimeCounter > 0f)
+        if (comboTimeCounter > 0f)
         {
             comboTimeCounter -= Time.deltaTime;
         }
 
-        if(comboTimeCounter <= 0f)
+        if (comboTimeCounter <= 0f)
         {
             combo = 0;
         }
@@ -229,7 +230,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(attack1 || attack2 || attack3)
+        if (attack1 || attack2 || attack3)
         {
             if (transform.localScale.x > 0f)
             {
@@ -242,43 +243,53 @@ public class PlayerController : MonoBehaviour
 
         }
 
-        if(damageCollision)
+        if (damageCollision)
         {
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
 
-            foreach(Collider2D enemy in hitEnemies)
+            foreach (Collider2D enemy in hitEnemies)
             {
-                enemy.GetComponent<EnemyHealthController>().TakeDamage(damage, gameObject);
-                damageCollision = false;
+                if (enemy.gameObject.tag == "Enemy")
+                {
+                    enemy.GetComponent<EnemyHealthController>().TakeDamage(damage, gameObject);
+                    damageCollision = false;
+                }
+
+                if (enemy.gameObject.tag == "Box")
+                {
+                   enemy.GetComponent<BoxScript>().TakeDamage(gameObject);
+                    damageCollision = false;
+                }
             }
         }
     }
 
-    public void GetEquipmentStats(int dmg, float atkSpeed, float knockback, int hp, float moveSpeed, float potionHp)
-    {
-        damage += dmg;
-        knockBackForce += knockback;
-        moveSpeed += moveSpeed;
-        
-        GetComponent<PlayerHealthController>().maxHealth += hp;
-        
-        //attackSpeed += atkSpeed;
-        //potionPower += potionHp;
-    }
-
-
-    public void DisableInput()
-    {
-        disableInput = true;
-    }
-
-    void OnDrawGizmos()
-    {
-        if(attackPoint == null)
+        public void GetEquipmentStats(int dmg, float atkSpeed, float knockback, int hp, float moveSpeed, float potionHp)
         {
-            return;
+            damage += dmg;
+            knockBackForce += knockback;
+            moveSpeed += moveSpeed;
+
+            GetComponent<PlayerHealthController>().maxHealth += hp;
+
+            //attackSpeed += atkSpeed;
+            //potionPower += potionHp;
         }
-       // Gizmos.color = Color.yellow;
-      //  Gizmos.DrawSphere(attackPoint.position, attackRange);
-    }
+
+
+        public void DisableInput()
+        {
+            disableInput = true;
+        }
+
+        void OnDrawGizmos()
+        {
+            if (attackPoint == null)
+            {
+                return;
+            }
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawSphere(attackPoint.position, attackRange);
+        }
+    
 }
