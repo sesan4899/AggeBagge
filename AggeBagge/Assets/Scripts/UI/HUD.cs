@@ -11,7 +11,7 @@ public class HUD : MonoBehaviour
 
     public Text damage;
     public Text wave;
-    public Text kill;
+    public Text killCount;
     public Text hp;
 
     public Image consumable;
@@ -29,12 +29,20 @@ public class HUD : MonoBehaviour
 
     void Update()
     {
+        //UI Info Text
         damage.text = "Damage: " + player.damage;
+        wave.text = "Wave: " + WaveManager.instance.wave;
+        killCount.text = "KillCount; " + WaveManager.instance.killCount;
+
+
+        //HP Bar
         hp.text = "HP: " + playerHp.health + " / " + playerHp.maxHealth;
 
         healthSlider.maxValue = playerHp.maxHealth;
         healthSlider.value = playerHp.health;
 
+
+        //Consumable
         if(EquipmentManager.instance.currentEquipment[5] != null)
         {
             consumable.sprite = EquipmentManager.instance.currentEquipment[5].icon;

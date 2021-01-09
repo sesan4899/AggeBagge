@@ -5,8 +5,8 @@ using UnityEngine;
 public class EquipmentManager : MonoBehaviour
 {
 
+    #region Singleton
     public static EquipmentManager instance;
-    public GameObject player;
     
     
     void Awake ()
@@ -15,10 +15,12 @@ public class EquipmentManager : MonoBehaviour
 
         inventory = InventoryManager.instance;
 
-        int numberOfSlots = System.Enum.GetNames(typeof(EquipmentSlot)).Length;
-        currentEquipment = new Item[numberOfSlots];
     }
 
+    #endregion
+
+
+    public GameObject player;
     public Item[] currentEquipment;
     InventoryManager inventory;
 
