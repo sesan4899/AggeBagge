@@ -56,11 +56,12 @@ public class EnemyHealthController : MonoBehaviour
     {
         myAnimator.SetBool("Dead", dead);
     }
-    public void TakeDamage(int damage, GameObject playerReference)
+    public void TakeDamage(int damage, GameObject playerReference, float knockBack)
     {
         if(!dead)
         {
             health -= damage;
+            knockBackForce = knockBack;
             knockBackTimeCounter = knockBackTime;
             player = playerReference;
             myRigidbody.velocity = new Vector2(0f, 0f);
@@ -69,6 +70,7 @@ public class EnemyHealthController : MonoBehaviour
             if (health <= 0)
             {
                 dead = true;
+                WaveManager.instance.Kill(gameObject);
                 ItemList.instance.DropItem(transform.position);
                 myAudioManager.SkeletonDeath.Play();
             }

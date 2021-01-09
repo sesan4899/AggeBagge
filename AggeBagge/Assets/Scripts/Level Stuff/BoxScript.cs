@@ -44,7 +44,7 @@ public class BoxScript : MonoBehaviour
             {
                 if (enemy.gameObject.tag == "Enemy")
                 {
-                    enemy.GetComponent<EnemyHealthController>().TakeDamage(damage, gameObject);
+                    enemy.GetComponent<EnemyHealthController>().TakeDamage(damage, gameObject, 2f);
                 }
             }
         }

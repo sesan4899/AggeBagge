@@ -193,6 +193,7 @@ MonoBehaviour:
   knockBackTimeCounter: 0
   myAnimator: {fileID: 5287062453312532531}
   dead: 0
+  myAudioManager: {fileID: 0}
 --- !u!114 &5287062453938016290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,7 +207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  detectionRange: 9
+  detectionRange: 50
   attackDetectionRange: 2
   attackRange: 0.7
   attackMoveForce: 1
@@ -215,7 +216,7 @@ MonoBehaviour:
   idleTimeCounter: 0
   walkTime: 0
   walkTimeCounter: 0
-  stunTime: 0.4
+  stunTime: 0.6
   stunTimeCounter: 0
   player: {fileID: 0}
   attackPoint: {fileID: 5287062454231670866}

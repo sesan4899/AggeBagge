@@ -25,7 +25,7 @@ public class WaveManager : MonoBehaviour
     public int enemyStartAmount;
     public int enemyAmountIncrease;
 
-    int numberToSpawn;
+    public int enemyCount;
     bool spawning = true;
 
     public GameObject enemyPrefab;
@@ -47,16 +47,18 @@ public class WaveManager : MonoBehaviour
     
     void Update()
     {
-        if (enemy.Count == 0 && numberToSpawn == 0)
+        if (enemy.Count == 0 && enemyCount == 0)
         {
+            GetComponent<SaveAndLoadMain>().SaveGame();
+
             spawning = false;
             wave++;
             SpawnSetup();
         }
 
-        else if (spawning == true && numberToSpawn > 0)
+        else if (spawning == true && enemyCount > 0)
         {
-            spawnCountdown--;
+            spawnCountdown -= Time.deltaTime;
 
             if(spawnCountdown <= 0)
             {
@@ -68,7 +70,7 @@ public class WaveManager : MonoBehaviour
 
     void SpawnSetup()
     {
-        numberToSpawn = enemyStartAmount + enemyAmountIncrease * wave;
+        enemyCount = enemyStartAmount + enemyAmountIncrease * wave;
 
         if (wave != 0)
         {
@@ -88,7 +90,7 @@ public class WaveManager : MonoBehaviour
 
     void Spawn()
     {
-        numberToSpawn--;
+        enemyCount--;
 
         int index = Random.Range(0, spawner.Count);
 
@@ -96,7 +98,7 @@ public class WaveManager : MonoBehaviour
         enemy.Add(GO);
     }
 
-    void Kill(GameObject kill)
+    public void Kill(GameObject kill)
     {
         enemy.Remove(kill);
         killCount++;

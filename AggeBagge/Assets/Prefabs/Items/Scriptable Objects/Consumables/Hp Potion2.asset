@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc09727260c60904da908948b4800f92, type: 3}
   m_Name: Hp Potion2
   m_EditorClassIdentifier: 
-  name: Medium Hp Potion
+  name: Medium Potion
   icon: {fileID: 21300000, guid: 44dc65116207f4b46aa85443dae5ad96, type: 3}
   tier: 1
   Equipslot: 5

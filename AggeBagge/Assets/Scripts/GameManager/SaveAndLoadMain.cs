@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SaveAndLoadMain : MonoBehaviour
 {
+
     public bool doNotLoad;
     public bool reset;
     public GameObject playerGO;
@@ -23,13 +24,17 @@ public class SaveAndLoadMain : MonoBehaviour
     public string[] currentEquipment = null;
 
 
-    private Save save;
-    private Load load;
+    Save save;
+    Load load;
 
+    PlayerHealthController playerHp;
 
     void Start()
     {
-        if(reset)
+        playerHp = playerGO.GetComponent<PlayerHealthController>();
+
+
+        if (reset)
         {
             PlayerPrefs.DeleteAll();
         }
@@ -38,9 +43,8 @@ public class SaveAndLoadMain : MonoBehaviour
 
         if(!doNotLoad)
         {
-            PlayerHealthController playerHp = playerGO.GetComponent<PlayerHealthController>();
             load.LoadPlayerInfo(out invSlot, out equipSlot, out xPos, out yPos, out hp, out wave, out killCount);
-
+            
             playerHp.health = hp;
 
 
@@ -87,14 +91,21 @@ public class SaveAndLoadMain : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if(playerHp.health <= 0)
+        {
+            PlayerPrefs.DeleteAll();
+        }
+    }
 
-    public void SaveAndExit()
+    public void SaveGame()
     {
         
         float xPos = playerGO.transform.position.x;
         float yPos = playerGO.transform.position.y;
-        int currentHealth = playerGO.GetComponent<PlayerHealthController>().health;
-        int wave = 0;
+        int currentHealth = playerHp.health;
+        int wave = GetComponent<WaveManager>().wave;
         int killCount = 0;
 
         currentEquipment = new string[6];
@@ -121,7 +132,12 @@ public class SaveAndLoadMain : MonoBehaviour
         save = new Save();
         save.SavePlayerInfo(invItems, currentEquipment, xPos, yPos, currentHealth, wave, killCount);
 
+    }
+
+    public void Quit()
+    {
         Application.Quit();
+
     }
 
 

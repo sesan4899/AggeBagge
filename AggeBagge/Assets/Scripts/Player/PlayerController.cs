@@ -255,7 +255,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (enemy.gameObject.tag == "Enemy")
                 {
-                    enemy.GetComponent<EnemyHealthController>().TakeDamage(damage, gameObject);
+                    enemy.GetComponent<EnemyHealthController>().TakeDamage(damage, gameObject, knockBackForce);
                     damageCollision = false;
                 }
 
@@ -275,9 +275,6 @@ public class PlayerController : MonoBehaviour
             moveSpeed += moveSpeed;
 
             GetComponent<PlayerHealthController>().maxHealth += hp;
-
-            //attackSpeed += atkSpeed;
-            //potionPower += potionHp;
         }
 
 

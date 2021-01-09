@@ -377,7 +377,7 @@ GameObject:
   - component: {fileID: 361060494}
   - component: {fileID: 361060493}
   m_Layer: 5
-  m_Name: KillText
+  m_Name: EnemiesText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -443,7 +443,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Kill Count: 0'
+  m_Text: 'Enemies:'
 --- !u!1 &448362453
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,7 +522,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Damage: 15'
+  m_Text: 'Damage: '
 --- !u!1 &607198436
 GameObject:
   m_ObjectHideFlags: 0
@@ -926,7 +926,7 @@ MonoBehaviour:
   healthSlider: {fileID: 8055711777839985593}
   damage: {fileID: 448362455}
   wave: {fileID: 1712886055}
-  killCount: {fileID: 361060493}
+  enemies: {fileID: 361060493}
   hp: {fileID: 1772118604}
   consumable: {fileID: 658757693}
 --- !u!1 &973935773
@@ -1161,7 +1161,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Save & Exit
+  m_Text: Exit Game
 --- !u!1 &1444375394
 GameObject:
   m_ObjectHideFlags: 0
@@ -1319,7 +1319,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Wave: 0'
+  m_Text: 'Wave:'
 --- !u!1 &1735505890
 GameObject:
   m_ObjectHideFlags: 0
@@ -1333,7 +1333,7 @@ GameObject:
   - component: {fileID: 1735505893}
   - component: {fileID: 1735505892}
   m_Layer: 5
-  m_Name: Save & Exit Button
+  m_Name: Exit Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

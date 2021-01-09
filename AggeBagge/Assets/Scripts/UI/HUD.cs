@@ -11,7 +11,7 @@ public class HUD : MonoBehaviour
 
     public Text damage;
     public Text wave;
-    public Text killCount;
+    public Text enemies;
     public Text hp;
 
     public Image consumable;
@@ -32,7 +32,7 @@ public class HUD : MonoBehaviour
         //UI Info Text
         damage.text = "Damage: " + player.damage;
         wave.text = "Wave: " + WaveManager.instance.wave;
-        killCount.text = "KillCount; " + WaveManager.instance.killCount;
+        enemies.text = "Enemies: " + WaveManager.instance.enemy.Count;
 
 
         //HP Bar
