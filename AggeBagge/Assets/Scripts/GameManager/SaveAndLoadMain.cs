@@ -44,7 +44,7 @@ public class SaveAndLoadMain : MonoBehaviour
         if(!doNotLoad)
         {
             load.LoadPlayerInfo(out invSlot, out equipSlot, out xPos, out yPos, out hp, out wave, out killCount);
-            
+            GetComponent<WaveManager>().wave = wave;
             playerHp.health = hp;
 
 

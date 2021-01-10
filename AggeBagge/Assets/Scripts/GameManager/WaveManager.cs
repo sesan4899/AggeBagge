@@ -17,7 +17,7 @@ public class WaveManager : MonoBehaviour
     #endregion
 
 
-    public int wave = -1;
+    public int wave;
     public int killCount;
     public float timeBetweeenSpawn;
 
@@ -70,9 +70,9 @@ public class WaveManager : MonoBehaviour
 
     void SpawnSetup()
     {
-        enemyCount = enemyStartAmount + enemyAmountIncrease * wave;
+        enemyCount = enemyStartAmount + enemyAmountIncrease * (wave - 1);
 
-        if (wave != 0)
+        if (wave != 1)
         {
             WaveComplete.SetActive(true);
             Invoke("StartSpawning", downTime);
